@@ -1,0 +1,52 @@
+# ====================================================================
+# EVATS PRODUCTION SECURE CODE-ONLY FILTER (CORRECTED)
+# ====================================================================
+
+# 1. Global Extension Blacklists (Covers all folders including public/)
+*.mp4
+*.mov
+*.avi
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.webp
+*.gif
+*.pdf
+*.zip
+*.tar.gz
+*.exe
+*.log
+*.blockmap
+*.yml
+*.docx
+*.txt
+
+# 2. Workspace Folder Discards
+EV component images/
+NotebookLM Training Docs/
+OEM training Vids/
+Pneumatic/
+tmp/
+Updated Flowcharts_final. (only use this)/
+
+# 3. Build & Cache Artifacts
+**/node_modules/
+**/dist/
+**/build/
+**/.prod/
+.env*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+# Electron Packager & Builder Outputs
+**/release-v*/
+**/win-unpacked/
+*.asar
+
+# ====================================================================
+# EXPLICIT WHITELIST EXCEPTIONS
+# ====================================================================
+# Force tracking of ONLY your optimized 3D geometry canvas
+!**/bus.glb

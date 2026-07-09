@@ -1,0 +1,1091 @@
+@import "tailwindcss";
+
+/* Inter — local bundle (previously loaded from Google Fonts CDN) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/Inter-400.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/Inter-500.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./assets/fonts/Inter-600.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/Inter-700.ttf') format('truetype');
+}
+
+/* JetBrains Mono — local bundle */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/JetBrainsMono-500.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./assets/fonts/JetBrainsMono-600.ttf') format('truetype');
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   DESIGN SYSTEM — Light theme (default)
+   Target: Linear / Notion / Vercel / Stripe-grade polish
+   Dark theme is preserved via .dark overrides below.
+   ============================================================ */
+
+:root {
+  /* Surfaces */
+  --bg-canvas:      #F6F8FA;   /* main background          */
+  --bg-surface:     #F1F5F9;   /* secondary surface        */
+  --bg-card:        #FFFFFF;   /* cards / panels           */
+  --bg-viewer:      #F8FAFC;   /* flowchart viewer         */
+
+  /* Borders & text */
+  --border-subtle:  #E2E8F0;
+  --border-strong:  #CBD5E1;
+  --text-primary:   #0F172A;
+  --text-secondary: #475569;
+  --text-muted:     #64748B;
+
+  /* Accent tokens (system / domain) */
+  --accent-hv:        #F97316;  /* HV systems     */
+  --accent-lv:        #2563EB;  /* LV systems     */
+  --accent-can:       #16A34A;  /* CAN network    */
+  --accent-pneumatic: #8B5CF6;  /* Pneumatics     */
+  --accent-thermal:   #0891B2;  /* Thermal        */
+  --accent-safety:    #DC2626;  /* Warnings       */
+  --accent-success:   #16A34A;  /* Success        */
+  --accent-neutral:   #64748B;  /* Inactive nav   */
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: Inter, system-ui, sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
+/* Dark theme (unchanged behaviour, preserved as-is) */
+.dark body {
+  background: #1a1a1a;
+  color: #d4d4d4;
+  font-family: Inter, Manrope, system-ui, sans-serif;
+}
+
+.app-shell {
+  background: var(--bg-canvas);
+}
+.dark .app-shell {
+  background: #1a1a1a;
+}
+
+/* ============================================================
+   Header (top navigation bar)
+   ============================================================ */
+.industrial-header {
+  border-bottom: 1px solid var(--border-subtle);
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.header-nav-slot {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 14px;
+  padding-right: 14px;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.dark .header-nav-slot {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.dark .industrial-header {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: #1a1a1a;
+  box-shadow: none;
+}
+
+/* ============================================================
+   Side & right panels
+   ============================================================ */
+.industrial-side-panel {
+  background: var(--bg-card);
+  box-shadow: none;
+}
+.dark .industrial-side-panel {
+  background: #1a1a1a;
+  box-shadow: none;
+}
+
+/* ============================================================
+   Flowchart viewer — "mounted on a clean technical canvas"
+   ============================================================ */
+.flowchart-stage {
+  background: var(--bg-viewer);
+}
+.dark .flowchart-stage {
+  background: #252525;
+}
+
+.flowchart-deck {
+  min-width: max-content;
+}
+
+/* ============================================================
+   Splash + holographic 3D gateway
+   ============================================================ */
+.splash-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  width: 100%;
+  min-height: 100%;
+  border: 0;
+  background: #1a1a1a;
+  color: #f8fafc;
+  cursor: pointer;
+  transition: opacity 520ms ease, visibility 520ms ease, background 300ms ease;
+}
+
+/* Light mode splash — clean white canvas matching the flowchart page */
+:root:not(.dark) .splash-screen {
+  background:
+    linear-gradient(180deg, rgba(246, 248, 250, 0.98), rgba(241, 245, 249, 0.99)),
+    radial-gradient(circle at 50% 38%, rgba(37, 99, 235, 0.07), transparent 50%);
+  color: var(--text-primary);
+}
+
+:root:not(.dark) .splash-screen__eyebrow {
+  color: #2563EB;
+}
+
+:root:not(.dark) .splash-screen__title {
+  color: var(--text-primary);
+}
+
+:root:not(.dark) .splash-screen__prompt {
+  color: var(--text-secondary);
+  animation: splash-prompt-flash-light 1.35s ease-in-out infinite;
+}
+
+@keyframes splash-prompt-flash-light {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+
+.splash-screen.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.splash-screen__eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #67e8f9;
+}
+
+.splash-screen__title {
+  max-width: min(940px, calc(100vw - 48px));
+  font-size: clamp(34px, 6vw, 76px);
+  font-weight: 700;
+  line-height: 0.98;
+  text-align: center;
+  letter-spacing: 0;
+  color: #f8fafc;
+}
+
+.splash-screen__prompt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(12px, 1.8vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9debf4;
+  animation: splash-prompt-flash 1.35s ease-in-out infinite;
+}
+
+/* Persistent top nav bar — shown on Splash and 3D screens */
+.app-persistent-nav {
+  position: relative;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 24px;
+  background: rgba(26, 26, 26, 0.97);
+  border-bottom: none;
+  backdrop-filter: blur(16px);
+  flex-shrink: 0;
+  transition: background 300ms ease, border-color 300ms ease;
+}
+
+/* Light mode: match the flowchart header exactly */
+.app-persistent-nav:not(.dark .app-persistent-nav) {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: none;
+}
+:root:not(.dark) .app-persistent-nav {
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: none;
+}
+
+.app-persistent-nav__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  padding-left: 14px;
+}
+
+.app-persistent-nav__theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(226, 232, 240, 0.22);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+/* Light mode toggle — matches the flowchart Header's icon buttons */
+:root:not(.dark) .app-persistent-nav__theme-toggle {
+  width: 32px;
+  height: 32px;
+  background: #ffffff;
+  color: #475569;
+  border-color: rgba(203, 213, 225, 0.86);
+}
+
+.app-persistent-nav__theme-toggle:hover {
+  border-color: rgba(103, 232, 249, 0.7);
+  background: rgba(8, 47, 56, 0.92);
+  color: #ffffff;
+  outline: none;
+}
+
+:root:not(.dark) .app-persistent-nav__theme-toggle:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0F172A;
+}
+
+.app-persistent-nav__theme-toggle:focus-visible {
+  outline: 2px solid rgba(103, 232, 249, 0.7);
+  outline-offset: 2px;
+}
+
+/* Browser-style app navigation */
+.app-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 10px;
+  background: rgba(3, 12, 16, 0.72);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+}
+
+/* Light mode: nav controls inside persistent nav should match the flowchart header style */
+:root:not(.dark) .app-persistent-nav .app-nav-controls {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+:root:not(.dark) .app-persistent-nav .app-nav-controls__button {
+  background: #ffffff;
+  color: #475569;
+  border-color: rgba(203, 213, 225, 0.86);
+}
+
+:root:not(.dark) .app-persistent-nav .app-nav-controls__button:hover:not(:disabled) {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0F172A;
+}
+
+.app-nav-controls--overlay {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  z-index: 45;
+}
+
+.app-nav-controls--header {
+  position: static;
+  z-index: auto;
+  padding: 4px;
+  border-color: rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.05);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.dark .app-nav-controls--header {
+  background: rgba(3, 12, 16, 0.72);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.app-nav-controls__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(226, 232, 240, 0.18);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.app-nav-controls--header .app-nav-controls__button {
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #475569;
+  border-color: rgba(203, 213, 225, 0.86);
+}
+
+.dark .app-nav-controls--header .app-nav-controls__button {
+  background: rgba(37, 37, 37, 0.8);
+  color: #d4d4d4;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.app-nav-controls__button:hover:not(:disabled),
+.app-nav-controls__button:focus-visible:not(:disabled) {
+  border-color: rgba(103, 232, 249, 0.64);
+  background: rgba(8, 47, 56, 0.92);
+  color: #ffffff;
+  outline: none;
+}
+
+.app-nav-controls__button:disabled {
+  cursor: default;
+  opacity: 0.36;
+}
+
+@keyframes splash-prompt-flash {
+  0%, 100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.three-gateway {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #1a1a1a;
+  color: #e8feff;
+  transition: opacity 520ms ease, background 300ms ease;
+}
+
+/* Light mode 3D gateway — airy technical blueprint feel matching the flowchart page */
+:root:not(.dark) .three-gateway {
+  background:
+    linear-gradient(180deg, #F6F8FA 0%, #EFF4FB 60%, #F1F5F9 100%),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.04), transparent 42%, rgba(249, 115, 22, 0.03));
+  color: var(--text-primary);
+}
+
+:root:not(.dark) .three-gateway__canvas::before {
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.22) 1px, transparent 1px);
+}
+
+.three-gateway.is-prewarming {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.three-gateway.is-active {
+  opacity: 1;
+}
+
+.three-gateway__canvas,
+.three-gateway__canvas canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.three-gateway__canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(to bottom, transparent 0, black 18%, black 86%, transparent 100%);
+}
+
+.three-gateway__hud {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: max-content;
+  max-width: calc(100vw - 260px);
+  text-align: center;
+  pointer-events: none;
+}
+
+.three-gateway__hud h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 42px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #f8fafc;
+  text-align: center;
+  width: 100%;
+}
+
+/* Light mode HUD heading */
+:root:not(.dark) .three-gateway__hud h2 {
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
+.three-gateway__labels {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ── Controls legend ──────────────────────────────────────────────────────── */
+.three-gateway__legend {
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+  z-index: 5;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: rgba(3, 34, 39, 0.72);
+  border: 1px solid rgba(0, 229, 255, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 1px rgba(0, 229, 255, 0.07);
+  backdrop-filter: blur(14px);
+  pointer-events: none;
+}
+
+:root:not(.dark) .three-gateway__legend {
+  background: rgba(248, 250, 252, 0.82);
+  border-color: rgba(37, 99, 235, 0.18);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.10),
+    inset 0 0 0 1px rgba(37, 99, 235, 0.07);
+}
+
+.legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(0, 229, 255, 0.8);
+}
+
+:root:not(.dark) .legend-item {
+  color: #2563EB;
+}
+
+.legend-icon {
+  width: 20px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.legend-item span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(248, 250, 252, 0.55);
+  white-space: nowrap;
+}
+
+:root:not(.dark) .legend-item span {
+  color: rgba(15, 23, 42, 0.5);
+}
+
+.subsystem-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  --callout-color: #00e5ff;
+  --callout-color-rgb: 0, 229, 255;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+  will-change: transform, opacity;
+}
+
+.subsystem-label__dot {
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.86);
+  border-radius: 9999px;
+  background: var(--callout-color);
+  box-shadow:
+    0 0 0 3px rgba(var(--callout-color-rgb), 0.18),
+    0 0 18px rgba(var(--callout-color-rgb), 0.9);
+}
+
+.subsystem-label__line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--line-width);
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--callout-color-rgb), 0.9), rgba(var(--callout-color-rgb), 0.14));
+  box-shadow: 0 0 10px rgba(var(--callout-color-rgb), 0.34);
+  transform: rotate(var(--line-angle));
+  transform-origin: 0 0;
+}
+
+.subsystem-label__button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 178px;
+  max-width: 232px;
+  transform: translate(var(--dx), var(--dy));
+  border: 1px solid rgba(var(--callout-color-rgb), 0.62);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(var(--callout-color-rgb), 0.2), rgba(3, 34, 39, 0.9) 54%),
+    rgba(3, 34, 39, 0.92);
+  color: var(--callout-color);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.24),
+    0 0 24px rgba(var(--callout-color-rgb), 0.14),
+    inset 0 0 0 1px rgba(var(--callout-color-rgb), 0.08);
+  padding: 12px 14px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.12;
+  display: inline-flex;
+  align-items: center;
+  text-align: left;
+  letter-spacing: 0;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease, transform 160ms ease;
+  pointer-events: auto;
+}
+
+.subsystem-label__button:hover,
+.subsystem-label__button:focus-visible {
+  border-color: rgba(var(--callout-color-rgb), 0.96);
+  background:
+    linear-gradient(135deg, rgba(var(--callout-color-rgb), 0.28), rgba(5, 52, 59, 0.96) 58%),
+    rgba(5, 52, 59, 0.96);
+  color: #ffffff;
+  outline: none;
+  transform: translate(var(--dx), var(--dy)) scale(1.02);
+}
+
+/* ── Order number badge ───────────────────────────────────────────────────── */
+.subsystem-label__order {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(var(--callout-color-rgb), 0.22);
+  border: 1px solid rgba(var(--callout-color-rgb), 0.55);
+  color: var(--callout-color);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-right: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+:root:not(.dark) .subsystem-label__order {
+  background: rgba(var(--callout-color-rgb), 0.14);
+  border-color: rgba(var(--callout-color-rgb), 0.45);
+}
+
+.subsystem-label__button:hover .subsystem-label__order,
+.subsystem-label__button:focus-visible .subsystem-label__order {
+  background: rgba(var(--callout-color-rgb), 0.35);
+  border-color: rgba(var(--callout-color-rgb), 0.85);
+  color: #ffffff;
+}
+
+
+/* ── Light-mode subsystem labels ─────────────────────────────────────────────
+   On the light canvas the dark-glass card would look out of place.
+   Switch to a clean white card with an accent border, matching the flowchart
+   page's card design system.                                                 */
+:root:not(.dark) .subsystem-label__dot {
+  border-color: rgba(15, 23, 42, 0.25);
+  box-shadow:
+    0 0 0 3px rgba(var(--callout-color-rgb), 0.14),
+    0 0 12px rgba(var(--callout-color-rgb), 0.5);
+}
+
+:root:not(.dark) .subsystem-label__line {
+  background: linear-gradient(90deg, rgba(var(--callout-color-rgb), 0.7), rgba(var(--callout-color-rgb), 0.08));
+  box-shadow: none;
+}
+
+:root:not(.dark) .subsystem-label__button {
+  background:
+    linear-gradient(135deg, rgba(var(--callout-color-rgb), 0.12), rgba(248, 250, 252, 0.88) 58%),
+    rgba(248, 250, 252, 0.90);
+  color: var(--callout-color);
+  border: 1px solid rgba(var(--callout-color-rgb), 0.55);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.10),
+    0 0 20px rgba(var(--callout-color-rgb), 0.12),
+    inset 0 0 0 1px rgba(var(--callout-color-rgb), 0.10);
+  backdrop-filter: blur(12px);
+}
+
+:root:not(.dark) .subsystem-label__button:hover,
+:root:not(.dark) .subsystem-label__button:focus-visible {
+  background:
+    linear-gradient(135deg, rgba(var(--callout-color-rgb), 0.20), rgba(241, 245, 249, 0.95) 58%),
+    rgba(241, 245, 249, 0.95);
+  border-color: rgba(var(--callout-color-rgb), 0.90);
+  color: var(--callout-color);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.13),
+    0 0 28px rgba(var(--callout-color-rgb), 0.22),
+    inset 0 0 0 1px rgba(var(--callout-color-rgb), 0.16);
+  transform: translate(var(--dx), var(--dy)) scale(1.02);
+}
+
+@media (max-width: 860px) {
+  .three-gateway__hud {
+    top: 18px;
+    left: 50%;
+    max-width: calc(100vw - 160px);
+  }
+
+  .subsystem-label__button {
+    min-width: 140px;
+    max-width: 170px;
+    padding: 10px 11px;
+    font-size: 13px;
+  }
+}
+
+/* The SVG itself becomes a card: white, soft border, 16px radius, lift shadow */
+.flowchart-svg {
+  display: block;
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color-scheme: light;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.dark .flowchart-svg {
+  border-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  background: #252525 !important;
+  background-color: #252525 !important;
+  color-scheme: dark;
+  box-shadow: none;
+}
+
+/* Ensure SVG text elements don't intercept clicks but remain visible */
+svg g[data-cell-id] text,
+svg g[data-cell-id] tspan,
+svg g[data-cell-id] foreignObject,
+svg g[data-cell-id] foreignObject * {
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* Hit zone styling - invisible but clickable */
+svg g[data-cell-id] rect[fill-opacity="0"] {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+.flowchart-component-highlight {
+  opacity: 0;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+  transform-box: fill-box;
+  transform: scale(0.98);
+  will-change: transform, opacity;
+}
+
+/* Hover highlight removed — only click-to-select highlighting now. */
+
+.flowchart-component-highlight-selected {
+  stroke-width: 3;
+  stroke-opacity: 1;
+  fill: currentColor;
+  fill-opacity: 0.08;
+}
+
+.flowchart-component-highlight.is-active {
+  opacity: 1;
+  transform: scale(1);
+  filter: none;
+}
+
+.flowchart-component-highlight-selected.is-active {
+  filter: none;
+}
+
+@keyframes pulse-selected {
+  0%, 100% {
+    stroke-opacity: 0.9;
+    fill-opacity: 0.06;
+  }
+  50% {
+    stroke-opacity: 1;
+    fill-opacity: 0.12;
+  }
+}
+
+.flowchart-component-highlight-selected.is-active {
+  animation: pulse-selected 2.5s ease-in-out infinite;
+}
+
+/* Dark mode styles for Flowchart 7 (Pneumatic Systems) and general SVG contrast */
+.dark .flowchart-svg text {
+  fill: #f8fafc !important;
+}
+
+.dark .flowchart-svg foreignObject div {
+  color: #f8fafc !important;
+}
+
+.dark .flowchart-svg [fill="#FFFFFF"],
+.dark .flowchart-svg [fill="#ffffff"],
+.dark .flowchart-svg [fill="rgb(255, 255, 255)"],
+.dark .flowchart-svg [fill="rgb(255,255,255)"] {
+  fill: #252525 !important;
+}
+
+.dark .flowchart-svg [fill="#000000"]:not(text),
+.dark .flowchart-svg [fill="rgb(0, 0, 0)"]:not(text),
+.dark .flowchart-svg [fill="rgb(0,0,0)"]:not(text) {
+  fill: #cbd5e1 !important;
+}
+
+.dark .flowchart-svg [stroke="#000000"]:not(.flowchart-component-highlight),
+.dark .flowchart-svg [stroke="rgb(0, 0, 0)"]:not(.flowchart-component-highlight),
+.dark .flowchart-svg [stroke="rgb(0,0,0)"]:not(.flowchart-component-highlight) {
+  stroke: #ffffff !important;
+}
+
+/* Invert black PNG icons in Flowchart 7 to be visible in dark mode */
+.dark .flowchart-svg image {
+  filter: invert(0.9) hue-rotate(180deg) brightness(1.2);
+}
+
+/* ============================================================
+   Scrollbar — thin, rounded, mode-aware
+   ============================================================ */
+
+* {
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width:  8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Light-mode thumb */
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.35);   /* slate-400 @ 35% */
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(148, 163, 184, 0.6);
+}
+
+/* Dark-mode thumb */
+.dark *::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.45);    /* slate-500 @ 45% */
+}
+.dark *::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 116, 139, 0.7);
+}
+
+/* ============================================================
+   Copyright notice
+   ============================================================ */
+.splash-screen__copyright,
+.three-gateway__copyright {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgba(248, 250, 252, 0.42);
+  pointer-events: none;
+  white-space: nowrap;
+  text-align: center;
+}
+
+:root:not(.dark) .splash-screen__copyright,
+:root:not(.dark) .three-gateway__copyright {
+  color: rgba(15, 23, 42, 0.48);
+}
+
+@media (max-width: 768px) {
+  .splash-screen__copyright,
+  .three-gateway__copyright {
+    font-size: 9px;
+    bottom: 12px;
+    max-width: 90%;
+    white-space: normal;
+    line-height: 1.3;
+  }
+}
+
+/* ============================================================
+   System Info Modal — terminal aesthetic
+   ============================================================ */
+.system-info-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  animation: modal-fade-in 150ms ease;
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.system-info-modal-card {
+  background: #0d0e11;
+  border: 1.5px solid #3f3f46;
+  border-radius: 6px;
+  padding: 22px 26px 20px;
+  width: 92%;
+  max-width: 600px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.9),
+    0 24px 60px rgba(0, 0, 0, 0.6);
+  font-family: monospace;
+  color: #d4d4d8;
+  position: relative;
+  animation: modal-slide-in 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-slide-in {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* Header row */
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.terminal-title {
+  color: #ffffff;
+}
+
+.terminal-close-btn {
+  background: none;
+  border: none;
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: bold;
+  color: #a1a1aa;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 120ms, background 120ms;
+  letter-spacing: 0.04em;
+}
+
+.terminal-close-btn:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+}
+
+/* Divider */
+.terminal-divider {
+  font-size: 11px;
+  color: #3f3f46;
+  margin: 0 0 14px 0;
+  user-select: none;
+  overflow: hidden;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+
+/* Body */
+.terminal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.terminal-line {
+  margin: 0;
+}
+
+.terminal-line-indent {
+  margin: 0;
+  padding-left: 96px;
+}
+
+.terminal-line-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.terminal-line-list-indent {
+  margin: 0;
+  padding-left: 45px;
+}
+
+.terminal-line-link {
+  margin: 0;
+  padding-left: 20px;
+  color: #a1a1aa;
+}
+
+/* Labels */
+.terminal-label {
+  color: #67e8f9;
+  font-weight: bold;
+}
+
+/* Link */
+.terminal-anchor {
+  color: #67e8f9;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 120ms;
+}
+
+.terminal-anchor:hover {
+  color: #a5f3fc;
+}
+
+/* Spacers */
+.terminal-spacer {
+  height: 10px;
+}
+
+.terminal-spacer-large {
+  height: 8px;
+}
+
+/* Copyright footer */
+.terminal-copyright {
+  margin: 0;
+  padding-top: 12px;
+  font-size: 12px;
+  color: #71717a;
+  border-top: 1px solid #27272a;
+}
+
+/* Light mode adjustments for modal */
+:root:not(.dark) .system-info-modal-card {
+  background: #111113;
+  border-color: #3f3f46;
+}

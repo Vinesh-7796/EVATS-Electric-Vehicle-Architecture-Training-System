@@ -1,0 +1,21 @@
+CUSTOM SOURCE-AVAILABLE LICENSE (ALL RIGHTS RESERVED)
+
+Copyright (c) 2026 Vinesh. All rights reserved.
+
+The source code, logic, and architectural designs contained within this repository are the exclusive intellectual property of the copyright holder. This software is published publicly on GitHub strictly for professional evaluation, academic verification, and architectural review by prospective employers, recruiters, and engineering managers.
+
+1. RESTRICTIONS AND PROHIBITIONS
+----------------------------------------------------------------------
+- NO LICENSE GRANTED: No permission is granted to any individual, institution, or corporate entity to copy, redistribute, modify, slice, or sub-license this codebase, application, or any portion of its sub-components for commercial or non-commercial reuse.
+- NO PUBLIC HOSTING OR MIRRORS: Compiling, deploying, or hosting public mirrors, clones, or derivative live instances of this application on any external servers, cloud hosting providers (including but not limited to Vercel, Netlify, GitHub Pages, AWS, or Heroku), or custom domains is strictly prohibited.
+- ACADEMIC INTEGRITY: Any unauthorized submission, copying, or presentation of this codebase (or parts thereof) as independent student project coursework, capstone assignments, or professional engineering delivery by third parties will be treated as plagiarism and copyright infringement.
+
+2. EDUCATIONAL MOCK CONTEXT & OEM DISCLAIMER
+----------------------------------------------------------------------
+This application is an independent, unofficial educational prototype developed strictly for training visualization and portfolio demonstration. It features mock layouts, configurations, and reference strings to SWITCH Mobility Automotive Ltd. to simulate an authentic, production-tier Original Equipment Manufacturer (OEM) software environment. This project is completely non-commercial, is not commissioned or endorsed by, and maintains no official corporate affiliation with SWITCH Mobility Automotive Ltd.
+
+3. PERMITTED USE
+----------------------------------------------------------------------
+Prospective employers, technical interviewers, and recruiters are explicitly permitted to read the source code, inspect the state machine and graphics architecture, download/clone local branches solely for internal technical evaluation, and interact with the officially deployed live demonstration URL hosted by the author.
+
+By viewing, interacting with, or downloading any portion of this repository, you acknowledge and agree to abide by these terms.
